@@ -2,6 +2,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const yargs = require('yargs');
 const notes = require('./notes.js');
+const { countReset } = require('console');
 
 // Create add command
 yargs.command({
@@ -25,3 +26,19 @@ yargs.command({
 });
 
 // Create remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove a note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        }
+    },
+    handler: (argv) => {
+        notes.removeNote(argv.title);
+    }
+});
+
+yargs.parse();
