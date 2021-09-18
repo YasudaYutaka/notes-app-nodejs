@@ -1,10 +1,6 @@
 const fs = require('fs');
 const chalk = require('chalk');
 
-const getNotes = () => {
-    return 'Your notes...';
-}
-
 const addNote = (title, body) => {
     const notes = loadNotes();
 
@@ -43,6 +39,17 @@ const listNotes = () => {
     });
 }
 
+const readNotes = (title) => {
+    const notes = loadNotes();
+    const searchedNote = notes.find((note) => note.title === title);
+    if(searchedNote) {
+        console.log(chalk.inverse(searchedNote.title));
+        console.log(searchedNote.body);
+    } else {
+        console.log(chalk.red.inverse('No such note'));
+    }
+}
+
 const saveNotes = (notes) => {
     const dataJSON = JSON.stringify(notes);
     fs.writeFileSync('notes.json', dataJSON);
@@ -59,8 +66,8 @@ const loadNotes = () => {
 }
 
 module.exports = {
-    getNotes: getNotes,
     addNote: addNote,
     removeNote: removeNote,
-    listNotes: listNotes
+    listNotes: listNotes,
+    readNotes: readNotes
 }
