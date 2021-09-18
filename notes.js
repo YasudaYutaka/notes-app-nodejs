@@ -9,9 +9,7 @@ const addNote = (title, body) => {
     const notes = loadNotes();
 
     // verify duplicate notes.
-    const duplicateNotes = notes.filter((notes) => {
-        return notes.title === title;
-    });
+    const duplicateNotes = notes.filter((notes) => notes.title === title);
 
     if(duplicateNotes.length === 0) {
         notes.push({
@@ -27,9 +25,7 @@ const addNote = (title, body) => {
 
 const removeNote = (title) => {
     const notes = loadNotes();
-    const notesToKeep = notes.filter((notes) => {
-        return notes.title !== title;
-    });
+    const notesToKeep = notes.filter((notes) => notes.title !== title);
 
     if(notesToKeep.length < notes.length) {
         console.log(chalk.green.inverse('Note removed!'));
